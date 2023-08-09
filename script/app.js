@@ -6,3 +6,13 @@ if(loggedUser!=null){
 }else{
   location.pathname = "/login.html"
 }
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  let logoutButton = document.getElementById("logout-button")
+  logoutButton.addEventListener("click", logoutAccount)
+})
+
+const logoutAccount =()=> {
+  localStorage.removeItem("loggedUser")
+  location.pathname = "/login.html"
+}
