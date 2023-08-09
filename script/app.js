@@ -1,5 +1,16 @@
 
 let loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+let users = JSON.parse(localStorage.getItem("users"))
+
+for(let i = 0; i < users.length; i++){
+  let quizzes = users[i].quizzes
+  let items = ""
+  for(let j = 0; j < quizzes.length; j++){
+    items += `<li>${quizzes[j].title}</li>`
+  }
+  document.getElementById("quiz-list").innerHTML = `<ol>${items}</ol>`
+}
+
 
 if(loggedUser!=null){
   document.getElementById("heading").innerHTML = `${loggedUser.name} Your welcome`
