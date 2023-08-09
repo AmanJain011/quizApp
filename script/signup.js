@@ -1,8 +1,6 @@
 import { Student } from "./Student.js"
 import { Teacher } from "./Teacher.js"
 
-const users = JSON.parse(localStorage.getItem("users")) || []
-
 document.addEventListener("DOMContentLoaded", ()=>{
     let signupForm = document.getElementById("signup-form")
     signupForm.addEventListener("submit", createAccount)
@@ -10,6 +8,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 const createAccount = (e) =>{
     e.preventDefault()
+    const users = JSON.parse(localStorage.getItem("users")) || []
     let userName = document.getElementById("user-name").value
     let userRole = document.getElementById("user-role").value
     let userMail = document.getElementById("user-mail").value
@@ -25,14 +24,16 @@ const createAccount = (e) =>{
           user = new Student(userName, userMail, userPassword)
           break
         default:
-          return console.log("User Role is required")
+          document.getElementById("error").innerHTML = 'User Role is required'
+          return
       }
       users.push(user)
       let jsonString = JSON.stringify(users)
       localStorage.setItem("users", jsonString)
-      console.log(JSON.parse(localStorage.getItem("users")))
+    //   console.log(JSON.parse(localStorage.getItem("users")))
+      location.pathname = "/login.html"
     }
     else{
-      console.log("password does not match")
+        document.getElementById("error").innerHTML = 'Password does not match'
     }
   }
